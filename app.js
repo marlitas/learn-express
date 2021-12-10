@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 
+const errorMiddleware = require('./middlewares/errors');
 //set up body parser
 app.use(express.json());
 
@@ -25,5 +26,8 @@ const PORT = process.env.PORT;
 app.listen(PORT, ()=>{
     console.log(`Server start on port ${process.env.PORT} in ${process.env.NODE_ENV} mode.`);
 });
+
+//Middleware for errors
+app.use(errorMiddleware)
 
 module.exports = app;
