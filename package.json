@@ -4,7 +4,7 @@
   "description": "this api is about jobs",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "test": "mocha --recursive --exit --reporter spec",
     "start": "node app.js",
     "dev": "nodemon app",
     "prod": "NODE_ENV=production nodemon app"

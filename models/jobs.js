@@ -93,7 +93,7 @@ const jobSchema = new Schema({
         required: [true, 'Please enter experience required.'],
         enum: {
             values: [
-                'No experience',
+                'No Experience',
                 '1 Year - 2 Years',
                 '2 Years - 5 Years',
                 '5+ Years'

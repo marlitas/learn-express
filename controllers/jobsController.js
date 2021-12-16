@@ -6,7 +6,6 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 //Get all jobs => /api/v1/jobs
 exports.getJobs = catchAsyncErrors( async (req, res, next) => {
     const jobs = await Job.find();
-
     res.status(200).json({
         success: true,
         results: jobs.length,

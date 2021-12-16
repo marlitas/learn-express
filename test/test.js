@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const app = require('../app.js');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-let Job = require('./models/jobs');
+let Job = require('../models/jobs');
 
 let job1 = {
     "title": "Node Developer",
@@ -32,29 +32,38 @@ describe('Job Endpoints', () => {
             done();
         });
     });
-    describe('GET /', () => {
-        it('should Get all the jobs', (done) => {
-            chai.request(app)
-                .get('/book')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.length.should.be.eql(2);
-                done();
-
-                });
-        });
-    });
     describe('POST /', () => {
         it('should create a new job', (done) => {
             chai.request(app)
             .post('/api/v1/jobs/new')
+            .set('content-type', 'application/json')
             .send(JSON.stringify(job1))
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 done();
             });
+        });
+    });
+
+    describe('GET /', () => {
+        // it('can find jobs', (done) => {
+        //     const jobs = Job.find(done);
+        //     console.log(jobs);
+        // })
+        it('should Get all the jobs', (done) => {
+            const jobs = Job.find()
+                            .then(res => console.log(res))
+
+            chai.request(app)
+                .get('/api/v1/jobs')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    // res.body.should.be.a('object');
+                    //res.body.length.should.be.eql(2);
+                done();
+
+                });
         });
     });
 });
